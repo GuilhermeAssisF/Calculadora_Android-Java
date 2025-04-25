@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_padding">8dp</dimen>
+    <dimen name="intern_margin">4dp</dimen>
+    <dimen name="button_v_margin">0dp</dimen>
+    <dimen name="button_text_size">30sp</dimen>
+    <dimen name="button_width_size">78sp</dimen>
+    <dimen name="button_height_size">88sp</dimen>
+    <dimen name="text_view_result_text_size">60sp</dimen>
+    <dimen name="text_view_ultima_expressao_text_size">40sp</dimen>
+</resources>
