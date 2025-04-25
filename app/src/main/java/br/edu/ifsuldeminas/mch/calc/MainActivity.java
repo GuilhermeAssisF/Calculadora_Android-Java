@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 try {
-
                     String expressao = textViewUltimaExpressao.getText().toString();
                     if (!expressao.isEmpty()) {
                         Expression exp = new ExpressionBuilder(expressao).build();
@@ -123,7 +122,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         textViewResultado.setText(resultadoFinal);
 
-                        textViewUltimaExpressao.setText(expressao);
+                        // Agora substitui a expressão antiga pelo resultado
+                        textViewUltimaExpressao.setText(resultadoFinal);
+                        resultadoMostrado = true;
                     }
                 } catch (Exception e) {
                     textViewResultado.setText("Erro");
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+
 
 
     }
@@ -165,18 +167,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void AcrescentarUmaExpressao(String string, boolean limparDados) {
         if (resultadoMostrado) {
-            textViewUltimaExpressao.setText("");
+            if (!isOperator(string)) {
+                textViewUltimaExpressao.setText("");  // limpa só se for número/ponto
+            }
             resultadoMostrado = false;
         }
 
         if (limparDados) {
-            textViewResultado.setText("");
             textViewUltimaExpressao.append(string);
         } else {
             textViewUltimaExpressao.append(string);
+        }
+
+        // Só limpa o resultado se for número (limparDados = true)
+        if (limparDados && !isOperator(string)) {
             textViewResultado.setText("");
         }
     }
+
+    private boolean isOperator(String str) {
+        return str.equals("+") || str.equals("-") || str.equals("*") || str.equals("/") || str.equals("%");
+    }
+
 
     @Override
     public void onClick(View view) {
